@@ -1,23 +1,22 @@
 # Secretary - Landing Page
 
-Визуально привлекательная лендинг-страница для приложения "Secretary" - персонального помощника по управлению задачами.
+Визуально привлекательная статическая лендинг-страница для приложения "Secretary" - персонального помощника по управлению задачами.
 
 ## Технологии
 
 - **Frontend**: React 18, TypeScript, Vite
 - **Styling**: Tailwind CSS, shadcn/ui
-- **Backend**: Express.js
 - **Animations**: Custom CSS animations
 - **Icons**: Lucide React
 
-## Установка и запуск
+## Разработка
 
 ### Требования
 
 - Node.js 18 или выше
 - npm или yarn
 
-### Шаги для запуска
+### Локальный запуск
 
 1. **Клонируйте репозиторий**
    ```bash
@@ -30,7 +29,7 @@
    npm install
    ```
 
-3. **Запустите проект в режиме разработки**
+3. **Запустите в режиме разработки**
    ```bash
    npm run dev
    ```
@@ -71,159 +70,126 @@ import screenshot3 from "@assets/your-image-3.png";
 import screenshot4 from "@assets/your-image-4.png";
 ```
 
-## Сборка для продакшена
+## Сборка статических файлов
+
+Эта лендинг-страница - **статический сайт**, серверная часть не требуется.
 
 ```bash
-npm run build
+npx vite build
 ```
 
-Собранные файлы будут в папке `dist/`.
+Готовые файлы будут в папке `dist/public/` - их можно разместить на любом веб-хостинге.
 
-## Развертывание на собственном хостинге
+## Развертывание
 
-### Вариант 1: VPS / Облачный сервер (Ubuntu/Debian)
+### Вариант 1: Netlify (рекомендуется) 
 
-1. **Подключитесь к серверу по SSH**
-   ```bash
-   ssh user@your-server-ip
+1. **Подключите репозиторий к Netlify**
+   - Зайдите на [netlify.com](https://netlify.com)
+   - Нажмите "Add new site" → "Import an existing project"
+   - Выберите ваш Git репозиторий
+
+2. **Настройте параметры сборки**
+   ```
+   Build command: npx vite build
+   Publish directory: dist/public
    ```
 
-2. **Установите Node.js и npm**
+3. **Deploy!** Сайт автоматически обновится при каждом коммите
+
+### Вариант 2: Vercel
+
+1. **Установите Vercel CLI**
    ```bash
-   curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-   sudo apt-get install -y nodejs
+   npm i -g vercel
    ```
 
-3. **Клонируйте проект**
+2. **Деплой**
    ```bash
-   git clone <repository-url>
-   cd <project-folder>
+   npx vite build
+   vercel --prod
+   ```
+
+   Или подключите через веб-интерфейс на [vercel.com](https://vercel.com)
+
+### Вариант 3: GitHub Pages
+
+1. **Соберите проект**
+   ```bash
+   npx vite build
+   ```
+
+2. **Загрузите в gh-pages branch**
+   ```bash
+   git checkout --orphan gh-pages
+   git rm -rf .
+   cp -r dist/public/* .
+   git add .
+   git commit -m "Deploy to GitHub Pages"
+   git push origin gh-pages --force
+   ```
+
+3. В настройках репозитория включите GitHub Pages для ветки `gh-pages`
+
+### Вариант 4: Обычный хостинг (cPanel, Timeweb и т.д.)
+
+1. **Соберите проект локально**
+   ```bash
    npm install
+   npx vite build
    ```
 
-4. **Соберите проект**
+2. **Загрузите файлы на хостинг**
+   - Откройте папку `dist/public/`
+   - Загрузите ВСЕ файлы через FTP в корневую папку сайта (обычно `public_html/` или `www/`)
+
+3. **Готово!** Сайт сразу заработает
+
+### Вариант 5: VPS / Собственный сервер (с Nginx)
+
+1. **Соберите проект**
    ```bash
-   npm run build
+   npx vite build
    ```
 
-5. **Установите PM2 для управления процессом**
+2. **Скопируйте файлы на сервер**
    ```bash
-   sudo npm install -g pm2
+   scp -r dist/public/* user@your-server:/var/www/secretary/
    ```
 
-6. **Запустите приложение**
-   ```bash
-   pm2 start dist/index.js --name secretary-landing
-   pm2 save
-   pm2 startup
-   ```
-
-7. **Настройте Nginx как reverse proxy**
+3. **Настройте Nginx**
    
-   Создайте файл `/etc/nginx/sites-available/secretary`:
+   Создайте `/etc/nginx/sites-available/secretary`:
    ```nginx
    server {
        listen 80;
        server_name your-domain.com;
+       root /var/www/secretary;
+       index index.html;
 
        location / {
-           proxy_pass http://localhost:5000;
-           proxy_http_version 1.1;
-           proxy_set_header Upgrade $http_upgrade;
-           proxy_set_header Connection 'upgrade';
-           proxy_set_header Host $host;
-           proxy_cache_bypass $http_upgrade;
+           try_files $uri $uri/ /index.html;
+       }
+
+       # Кэширование статики
+       location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {
+           expires 1y;
+           add_header Cache-Control "public, immutable";
        }
    }
    ```
 
-   Активируйте конфигурацию:
+   Активируйте:
    ```bash
    sudo ln -s /etc/nginx/sites-available/secretary /etc/nginx/sites-enabled/
    sudo nginx -t
-   sudo systemctl restart nginx
+   sudo systemctl reload nginx
    ```
 
-8. **Настройте SSL с Let's Encrypt (опционально)**
+4. **Настройте SSL (опционально)**
    ```bash
-   sudo apt-get install certbot python3-certbot-nginx
    sudo certbot --nginx -d your-domain.com
    ```
-
-### Вариант 2: Shared Hosting (cPanel)
-
-1. Соберите проект локально:
-   ```bash
-   npm run build
-   ```
-
-2. Загрузите содержимое папки `dist/` на хостинг через FTP
-
-3. Убедитесь, что на хостинге установлен Node.js (проверьте в cPanel)
-
-4. Создайте файл `.htaccess` для перенаправления:
-   ```apache
-   RewriteEngine On
-   RewriteRule ^$ http://127.0.0.1:5000/ [P,L]
-   RewriteCond %{REQUEST_FILENAME} !-f
-   RewriteCond %{REQUEST_FILENAME} !-d
-   RewriteRule ^(.*)$ http://127.0.0.1:5000/$1 [P,L]
-   ```
-
-5. Запустите приложение через Node.js App в cPanel
-
-### Вариант 3: Docker
-
-1. **Создайте `Dockerfile` в корне проекта**
-   ```dockerfile
-   FROM node:18-alpine
-   
-   WORKDIR /app
-   
-   COPY package*.json ./
-   RUN npm ci --only=production
-   
-   COPY . .
-   RUN npm run build
-   
-   EXPOSE 5000
-   
-   CMD ["node", "dist/index.js"]
-   ```
-
-2. **Создайте `docker-compose.yml`**
-   ```yaml
-   version: '3.8'
-   services:
-     web:
-       build: .
-       ports:
-         - "5000:5000"
-       restart: always
-   ```
-
-3. **Соберите и запустите**
-   ```bash
-   docker-compose up -d
-   ```
-
-### Вариант 4: Статический хостинг (если нужен только frontend)
-
-Если backend не требуется, можно развернуть только frontend на:
-
-- **Vercel**: `vercel deploy`
-- **Netlify**: `netlify deploy --prod`
-- **GitHub Pages**: Загрузите содержимое `dist/client/` в gh-pages branch
-
-## Переменные окружения
-
-Для продакшен-окружения создайте файл `.env`:
-
-```env
-NODE_ENV=production
-PORT=5000
-SESSION_SECRET=your-secret-key-here
-```
 
 ## Кастомизация дизайна
 
