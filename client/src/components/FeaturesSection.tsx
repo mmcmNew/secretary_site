@@ -2,6 +2,7 @@ import { CheckSquare, Mic, Calendar, BookOpen, Timer, Database } from "lucide-re
 import screenshot1 from "@assets/Снимок экрана 2025-10-07 204347_1759860043632.png";
 import screenshot2 from "@assets/Снимок экрана 2025-10-07 204356_1759860043631.png";
 import screenshot3 from "@assets/Снимок экрана 2025-10-07 204318_1759860043633.png";
+import screenshot4 from "@assets/Снимок экрана 2025-10-07 211333_1759860851568.png";
 
 export default function FeaturesSection() {
   const features = [
@@ -25,6 +26,13 @@ export default function FeaturesSection() {
       description: "Встроенные таймеры для задач с голосовыми уведомлениями через Edge TTS. Отслеживайте время работы над проектами в реальном времени.",
       image: screenshot3,
       imageAlt: "Таймеры и фокус"
+    },
+    {
+      icon: BookOpen,
+      title: "Журналы и аналитика",
+      description: "Ведите дневники: рабочий журнал, дневник трейдинга, журнал проектов, бэктестинга и личный дневник. Храните заметки, прикрепляйте файлы, анализируйте продуктивность.",
+      image: screenshot4,
+      imageAlt: "Редактор журналов"
     }
   ];
 
@@ -33,11 +41,6 @@ export default function FeaturesSection() {
       icon: Mic,
       title: "Голосовой помощник с AI",
       description: "Управляйте задачами голосом на естественном языке. Помощник понимает команды типа \"создай задачу купить молоко в список покупки\" или \"отметь задачу отчет как выполненную\". Интеграция с Meta AI для ответов на вопросы."
-    },
-    {
-      icon: BookOpen,
-      title: "Журналы и аналитика",
-      description: "Ведите дневники: рабочий журнал, дневник трейдинга, журнал проектов, бэктестинга и личный дневник. Храните заметки, прикрепляйте файлы, анализируйте продуктивность."
     },
     {
       icon: Database,
@@ -97,7 +100,7 @@ export default function FeaturesSection() {
           ))}
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mt-32">
+        <div className="grid md:grid-cols-2 gap-8 mt-32">
           {additionalFeatures.map((feature, index) => (
             <div
               key={index}
