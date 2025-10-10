@@ -15,7 +15,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-semibold">Ресурсы</h4>
             <ul className="space-y-2">
-              <li>
+              {/* <li>
                 <a 
                   href="#" 
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 w-fit"
@@ -24,8 +24,8 @@ export default function Footer() {
                   <FileText className="w-4 h-4" />
                   Документация
                 </a>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <a 
                   href="#" 
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 w-fit"
@@ -34,10 +34,10 @@ export default function Footer() {
                   <Github className="w-4 h-4" />
                   GitHub
                 </a>
-              </li>
+              </li> */}
               <li>
                 <a 
-                  href="#" 
+                  href="https://t.me/+n3WyJsiCrQMyZTdi" 
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 w-fit"
                   data-testid="link-report"
                 >
@@ -52,8 +52,9 @@ export default function Footer() {
             <h4 className="font-semibold">Информация</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>Версия: <span className="font-mono">1.0.0</span></li>
-              <li>Размер: <span className="font-mono">~150 МБ</span></li>
-              <li>Платформы: Windows, Linux, macOS</li>
+              <li>Размер: <span className="font-mono">~600 МБ</span></li>
+              <li>Платформы: Windows</li>
+              {/* <li>Платформы: Windows, Linux, macOS</li> */}
               <li>Лицензия: Бесплатно для личного использования</li>
             </ul>
           </div>

@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  secretary-app:
+    # Замените build на image и укажите имя вашего образа в репозитории
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: playermmcm/secretary-site:latest
+    container_name: secretary-app
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+      - "441:443" # Если вы используете Traefik для SSL
+    networks:
+      - n8n_with_https_default
+    labels:
+      # Traefik labels, теперь указывающие на порт 80
+      - "traefik.enable=true"
+      - "traefik.http.routers.secretary.rule=Host(`ndomen.ru`)"
+      - "traefik.http.routers.secretary.entrypoints=websecure"
+      - "traefik.http.routers.secretary.tls.certresolver=mytlschallenge"
+      - "traefik.http.services.secretary.loadbalancer.server.port=80" 
+
+      # Middleware для перенаправления HTTP на HTTPS (оставлено как есть)
+      - "traefik.http.routers.secretary-http.rule=Host(`ndomen.ru`)"
+      - "traefik.http.routers.secretary-http.entrypoints=web"
+      - "traefik.http.routers.secretary-http.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
+
+networks:
+  n8n_with_https_default:
+    external: true
+
+# Сервис nginx и volume logs удалены, так как они больше не нужны

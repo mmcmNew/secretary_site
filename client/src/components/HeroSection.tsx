@@ -24,15 +24,17 @@ export default function HeroSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                size="lg" 
-                className="text-lg px-8 group"
-                data-testid="button-download-hero"
-              >
-                <Download className="w-5 h-5 mr-2 group-hover:animate-bounce" />
-                Скачать Secretary
-              </Button>
-              <Button 
+              <a href="https://files.ndomen.ru/SecretaryAppInstaller.exe" download>
+                <Button 
+                  size="lg" 
+                  className="text-lg px-8 group"
+                  data-testid="button-download-hero"
+                >
+                  <Download className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+                  Скачать Secretary
+                </Button>
+              </a>
+              {/* <Button 
                 size="lg" 
                 variant="outline" 
                 className="text-lg px-8"
@@ -40,7 +42,7 @@ export default function HeroSection() {
               >
                 <Github className="w-5 h-5 mr-2" />
                 GitHub
-              </Button>
+              </Button> */}
             </div>
 
             <div className="flex flex-wrap gap-6 pt-4">
@@ -50,11 +52,12 @@ export default function HeroSection() {
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <div className="w-2 h-2 rounded-full bg-chart-2 animate-pulse" />
-                <span className="font-mono">~150 МБ</span>
+                <span className="font-mono">~600 МБ</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <div className="w-2 h-2 rounded-full bg-chart-2 animate-pulse" />
-                <span>Windows • Linux • macOS</span>
+                {/* <span>Windows • Linux • macOS</span> */}
+                <span>Windows</span>
               </div>
             </div>
           </div>
