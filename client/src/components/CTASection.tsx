@@ -1,22 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Download, MessageSquare } from "lucide-react";
 import GradientBackground from "./GradientBackground";
-import { useEffect, useState } from "react";
+import { useVersionInfo } from "@/hooks/useVersionInfo";
 
-interface VersionInfo {
-  version: string;
-  downloadUrl: string;
-}
 
 export default function CTASection() {
-  const [versionInfo, setVersionInfo] = useState<VersionInfo | null>(null);
-
-  useEffect(() => {
-    fetch('/version.json')
-      .then(response => response.json())
-      .then(data => setVersionInfo(data))
-      .catch(error => console.error('Error fetching version info:', error));
-  }, []);
+  const versionInfo = useVersionInfo();
 
   return (
     <section className="relative py-32 overflow-hidden">

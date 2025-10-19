@@ -4,17 +4,17 @@ export default function ScreenshotsGallery() {
 
   const screenshots = [
     {
-      src: "/public_assets/tasks.png",
+      src: "https://files.ndomen.ru/secretary/public_assets/tasks.png",
       title: "Списки задач и проекты",
       description: "Организуйте задачи по проектам и спискам с подробным отслеживанием"
     },
     {
-      src: "/public_assets/calendar.png",
+      src: "https://files.ndomen.ru/secretary/public_assets/calendar.png",
       title: "Календарь и планирование",
       description: "Визуализируйте задачи в календаре с поддержкой повторяющихся событий"
     },
     {
-      src: "/public_assets/timers.png",
+      src: "https://files.ndomen.ru/secretary/public_assets/timers.png",
       title: "Таймеры и фокус",
       description: "Отслеживайте время работы и анализируйте продуктивность"
     }

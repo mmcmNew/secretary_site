@@ -1,15 +1,9 @@
 import { Github, FileText, MessageSquare, Heart } from "lucide-react";
-import { useState } from "react";
+import { useVersionInfo } from "@/hooks/useVersionInfo";
 
-
-interface VersionInfo {
-  version: string;
-  downloadUrl: string;
-  telegamUrl?: string;
-}
 
 export default function Footer() {
-    const [versionInfo, setVersionInfo] = useState<VersionInfo | null>(null);
+  const versionInfo = useVersionInfo();
 
   return (
     <footer className="border-t border-border bg-card/30">

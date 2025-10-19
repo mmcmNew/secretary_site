@@ -5,28 +5,28 @@ export default function FeaturesSection() {
       icon: CheckSquare,
       title: "Умное управление задачами",
       description: "Создавайте задачи, подзадачи, списки и проекты. Организуйте работу по группам, устанавливайте приоритеты, дедлайны и повторяющиеся события. Система поддерживает различные интервалы повторений: ежедневно, еженедельно, по рабочим дням.",
-      image: "/public_assets/tasks.png",
+      image: "https://files.ndomen.ru/secretary/public_assets/tasks.png",
       imageAlt: "Списки задач и проекты"
     },
     {
       icon: Calendar,
       title: "Календарь и планирование",
       description: "Визуализация задач в календаре с поддержкой повторяющихся событий (rrule). Функция \"Мой день\" показывает актуальные задачи с учетом вашего часового пояса. Отслеживание фактически потраченного времени через анти-расписание.",
-      image: "/public_assets/calendar.png",
+      image: "https://files.ndomen.ru/secretary/public_assets/calendar.png",
       imageAlt: "Календарь и планирование"
     },
     {
       icon: Timer,
       title: "Таймеры и уведомления",
-      description: "Встроенные таймеры для задач с голосовыми уведомлениями через Edge TTS. Отслеживайте ��ремя работы над проектами в реальном времени.",
-      image: "/public_assets/timers.png",
+      description: "Встроенные таймеры для задач с голосовыми уведомлениями через Edge TTS. Отслеживайте время работы над проектами в реальном времени.",
+      image: "https://files.ndomen.ru/secretary/public_assets/timers.png",
       imageAlt: "Таймеры и фокус"
     },
     {
       icon: BookOpen,
       title: "Журналы и аналитика",
       description: "Ведите дневники: рабочий журнал, дневник трейдинга, журнал проектов, бэктестинга и личный дневник. Храните заметки, прикрепляйте файлы, анализируйте продуктивность.",
-      image: "/public_assets/journals.png",
+      image: "https://files.ndomen.ru/secretary/public_assets/journals.png",
       imageAlt: "Редактор журналов"
     }
   ];

@@ -2,21 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import GradientBackground from "./GradientBackground";
 import { useEffect, useState } from "react";
+import { useVersionInfo } from "@/hooks/useVersionInfo";
 
-interface VersionInfo {
-  version: string;
-  downloadUrl: string;
-}
 
 export default function HeroSection() {
-  const [versionInfo, setVersionInfo] = useState<VersionInfo | null>(null);
-
-  useEffect(() => {
-    fetch('/version.json')
-      .then(response => response.json())
-      .then(data => setVersionInfo(data))
-      .catch(error => console.error('Error fetching version info:', error));
-  }, []);
+  const versionInfo = useVersionInfo();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-24">
@@ -81,7 +71,7 @@ export default function HeroSection() {
             <div className="relative group">
               <div className="absolute -inset-4 bg-gradient-to-r from-primary to-chart-2 rounded-lg opacity-20 blur-2xl group-hover:opacity-30 transition-opacity" />
               <img
-                src="/public_assets/tasks.png"
+                src="https://files.ndomen.ru/secretary/public_assets/tasks.png"
                 alt="Secretary App Interface"
                 className="relative rounded-lg shadow-2xl border border-border transition-transform duration-500 group-hover:scale-105"
                 data-testid="img-hero-screenshot"
