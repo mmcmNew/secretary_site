@@ -20,6 +20,10 @@ export function log(message: string, source = "express") {
 }
 
 export async function setupVite(app: Express, server: Server) {
+  // Добавляем middleware для статических файлов из public_assets
+  const publicAssetsPath = path.resolve(import.meta.dirname, "..", "public_assets");
+  app.use("/public_assets", express.static(publicAssetsPath));
+
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },

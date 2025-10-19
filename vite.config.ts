@@ -35,6 +35,8 @@ export default defineConfig({
     fs: {
       strict: true,
       deny: ["**/.*"],
+      allow: ["../public_assets"],
     },
   },
+  publicDir: "public",
 });

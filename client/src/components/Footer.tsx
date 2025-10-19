@@ -1,6 +1,16 @@
 import { Github, FileText, MessageSquare, Heart } from "lucide-react";
+import { useState } from "react";
+
+
+interface VersionInfo {
+  version: string;
+  downloadUrl: string;
+  telegamUrl?: string;
+}
 
 export default function Footer() {
+    const [versionInfo, setVersionInfo] = useState<VersionInfo | null>(null);
+
   return (
     <footer className="border-t border-border bg-card/30">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
@@ -37,7 +47,7 @@ export default function Footer() {
               </li> */}
               <li>
                 <a 
-                  href="https://t.me/+n3WyJsiCrQMyZTdi" 
+                  href={versionInfo?.telegamUrl || '#'} 
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 w-fit"
                   data-testid="link-report"
                 >
@@ -51,7 +61,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-semibold">Информация</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Версия: <span className="font-mono">1.0.0</span></li>
+              <li>Версия: <span className="font-mono">v{versionInfo?.version}</span></li>
               <li>Размер: <span className="font-mono">~600 МБ</span></li>
               <li>Платформы: Windows</li>
               {/* <li>Платформы: Windows, Linux, macOS</li> */}

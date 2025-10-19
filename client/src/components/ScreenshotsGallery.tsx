@@ -1,24 +1,20 @@
 import { useState } from "react";
-import screenshot1 from "@assets/Снимок экрана 2025-10-07 204347_1759860043632.png";
-import screenshot2 from "@assets/Снимок экрана 2025-10-07 204356_1759860043631.png";
-import screenshot3 from "@assets/Снимок экрана 2025-10-07 204318_1759860043633.png";
-
 export default function ScreenshotsGallery() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const screenshots = [
     {
-      src: screenshot1,
+      src: "/public_assets/tasks.png",
       title: "Списки задач и проекты",
       description: "Организуйте задачи по проектам и спискам с подробным отслеживанием"
     },
     {
-      src: screenshot2,
+      src: "/public_assets/calendar.png",
       title: "Календарь и планирование",
       description: "Визуализируйте задачи в календаре с поддержкой повторяющихся событий"
     },
     {
-      src: screenshot3,
+      src: "/public_assets/timers.png",
       title: "Таймеры и фокус",
       description: "Отслеживайте время работы и анализируйте продуктивность"
     }

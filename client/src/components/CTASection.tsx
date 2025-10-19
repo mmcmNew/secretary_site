@@ -1,8 +1,23 @@
 import { Button } from "@/components/ui/button";
-import { Download, FileText, Github, MessageSquare } from "lucide-react";
+import { Download, MessageSquare } from "lucide-react";
 import GradientBackground from "./GradientBackground";
+import { useEffect, useState } from "react";
+
+interface VersionInfo {
+  version: string;
+  downloadUrl: string;
+}
 
 export default function CTASection() {
+  const [versionInfo, setVersionInfo] = useState<VersionInfo | null>(null);
+
+  useEffect(() => {
+    fetch('/version.json')
+      .then(response => response.json())
+      .then(data => setVersionInfo(data))
+      .catch(error => console.error('Error fetching version info:', error));
+  }, []);
+
   return (
     <section className="relative py-32 overflow-hidden">
       <GradientBackground />
@@ -19,11 +34,12 @@ export default function CTASection() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="https://files.ndomen.ru/SecretaryAppInstaller.exe" download>
-              <Button 
-                size="lg" 
+            <a href={versionInfo?.downloadUrl} download>
+              <Button
+                size="lg"
                 className="text-lg px-10 py-6 group relative overflow-hidden"
                 data-testid="button-download-cta"
+                disabled={!versionInfo}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-primary via-chart-2 to-primary bg-[length:200%_auto] animate-shimmer opacity-0 group-hover:opacity-20 transition-opacity" />
                 <Download className="w-5 h-5 mr-2 group-hover:animate-bounce" />
@@ -35,7 +51,7 @@ export default function CTASection() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-8">
             <div className="space-y-2 animate-fade-in" style={{ animationDelay: '100ms' }}>
               <div className="text-sm text-muted-foreground">Версия</div>
-              <div className="font-mono text-2xl font-bold">1.0.0</div>
+              <div className="font-mono text-2xl font-bold">{versionInfo?.version}</div>
             </div>
             <div className="space-y-2 animate-fade-in" style={{ animationDelay: '200ms' }}>
               <div className="text-sm text-muted-foreground">Размер</div>

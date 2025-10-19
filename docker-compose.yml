@@ -2,16 +2,14 @@ version: '3.8'
 
 services:
   secretary-app:
-    # Замените build на image и укажите имя вашего образа в репозитории
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
     image: playermmcm/secretary-site:latest
     container_name: secretary-app
     restart: unless-stopped
     ports:
       - "3000:80"
       - "441:443" # Если вы используете Traefik для SSL
+    volumes:
+      - ./public_assets:/usr/share/nginx/htmlpublic_assets
     networks:
       - n8n_with_https_default
     labels:
